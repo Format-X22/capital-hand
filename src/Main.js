@@ -13,7 +13,7 @@ class Main extends BasicMain {
     }
 
     async start() {
-        const config = this._initController.makeConfig();
+        const config = await this._initController.makeConfig();
 
         this.addNested(new TradeLoop(config));
 
