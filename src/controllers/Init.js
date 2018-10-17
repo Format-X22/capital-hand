@@ -26,9 +26,17 @@ class Init extends BasicController {
         });
         const price = +this._extractValue(priceRaw);
 
+        const amountRaw = await dialog.prompt({
+            type: 'input',
+            name: 'Количество контрактов?',
+            validate: this._isNumber,
+        });
+        const amount = +this._extractValue(amountRaw);
+
         Logger.info(`Тип позиции - ${type}`);
         Logger.info(`Пограничное значение - ${edge}`);
         Logger.info(`Значение для входа - ${price}`);
+        Logger.info(`Количество контрактов - ${amount}`);
 
         const confirmRaw = await dialog.prompt({
             type: 'confirm',
@@ -41,7 +49,7 @@ class Init extends BasicController {
             process.exit(0);
         }
 
-        return { type, edge, price };
+        return { type, edge, price, amount };
     }
 
     _extractValue(raw) {
